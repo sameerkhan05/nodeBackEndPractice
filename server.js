@@ -4,8 +4,12 @@ const db = require("./db");
 const Person = require("./models/Person");
 const bodyParser = require("body-parser");
 const MenuItem = require("./models/Menu");
+require('dotenv').config();
 
 app.use(bodyParser.json());
+const PORT = process.env.PORT || 3000
+
+
 
 app.get("/", function (req, res) {
   res.send("Welcome to Hotel....");
@@ -62,3 +66,4 @@ app.post("/menu", async (req,res) => {
 app.listen(3000, () => {
   console.log("server is live");
 });
+

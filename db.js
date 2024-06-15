@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect("mongodb://127.0.0.1:27017/hotels", {
+const MongoURL = process.env.MONGODB_URL;
+
+mongoose.connect(MongoURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
