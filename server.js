@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 const bodyParser = require("body-parser");
+const passport = require("./auth");
 
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ const logRequest = (req, res, next) => {
 };
 
 app.use(logRequest);
+const localAuthMiddleware = passport.authenticate("local", { session: false });
 
 app.get("/", function (req, res) {
   res.send("Welcome to Hotel....");
@@ -27,7 +29,7 @@ const personRoute = require("./routes/personRoutes");
 const menuRoute = require("./routes/menuItemRoutes");
 //Use routes
 app.use("/person", personRoute);
-app.use("/menu", menuRoute);
+app.use("/menu", localAuthMiddleware, menuRoute);
 //start server
 
 app.listen(3000, () => {
