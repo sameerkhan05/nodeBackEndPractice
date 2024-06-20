@@ -12,7 +12,7 @@ passport.use(
       }
       const isPasswordMatch = await user.comparePassword(password);
       if (isPasswordMatch) {
-        return done(null, user);
+        return done(null, user); 
       } else {
         return done(null, false, { message: "Incorrect Password" });
       }
